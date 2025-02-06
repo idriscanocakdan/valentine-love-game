@@ -1,22 +1,105 @@
-# Benimle Sevgili Olur Musun? ❤️
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benimle Sevgili Olur Musun?</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #fce4ec;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .card {
+            display: inline-block;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            cursor: pointer;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 5px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+        .yes {
+            background-color: #ff4081;
+            color: white;
+        }
+        .no {
+            background-color: #ccc;
+            color: black;
+            position: absolute;
+        }
+        .hidden {
+            display: none;
+        }
+        .hugging-bears {
+            width: 200px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card" id="questionCard">Benimle sevgili olur musun?</div>
+        <div class="buttons hidden" id="answerButtons">
+            <button class="yes" id="yesButton">Evet</button>
+            <button class="no" id="noButton">Hayır</button>
+        </div>
+        <div id="finalMessage" class="hidden">
+            <img src="https://i.imgur.com/UYzPoWz.png" class="hugging-bears" alt="Sarılmış ayıcıklar">
+            <p>Harika! Şimdi sevgilin için en iyi hediyeyi seç!</p>
+            <a href="https://app.hb.biz/G5UeuuxPdGbu" id="affiliateLink" target="_blank">Hediye Önerisi İçin Tıkla</a>
+            <p style="font-size: 12px; color: gray;">*Bu bağlantı bir <strong>affiliate (reklam) linkidir</strong>. Satın alırsanız bize küçük bir komisyon kazandırabilirsiniz, size ekstra bir maliyet oluşturmaz.</p>
+        </div>
+    </div>
+    
+    <script>
+        document.getElementById("questionCard").addEventListener("click", function() {
+            document.getElementById("questionCard").classList.add("hidden");
+            document.getElementById("answerButtons").classList.remove("hidden");
+        });
 
-Bu proje, eğlenceli bir interaktif sevgili olma teklifi oyunudur. Kullanıcı, "Benimle sevgili olur musun?" sorusuna yanıt verirken "Hayır" seçeneği kaçabilir veya "Evet" seçenekleri artabilir. "Evet" seçildiğinde ise sarılan iki minik ayıcık gösterilir ve sevgiliye özel hediye önerisi sunulur. 🎁
+        let variation = Math.floor(Math.random() * 2);
+        let noButton = document.getElementById("noButton");
+        let yesButton = document.getElementById("yesButton");
 
-## Özellikler 🚀
-- "Hayır" butonu farklı animasyonlarla kullanıcıyı zorlar:
-  - Kaçan buton 🏃‍♂️
-  - "Evet" butonlarının çoğalması ➕
-- "Evet" butonuna tıklanınca animasyonlu ayıcıklar gösterilir 🧸
-- Sevgiliye özel affiliate hediye önerisi linki eklenmiştir.
+        if (variation === 0) {
+            // Kaçan "Hayır" butonu
+            noButton.addEventListener("mouseover", function() {
+                let x = Math.random() * (window.innerWidth - 100);
+                let y = Math.random() * (window.innerHeight - 100);
+                noButton.style.left = x + "px";
+                noButton.style.top = y + "px";
+            });
+        } else if (variation === 1) {
+            // "Evet" butonu çoğaltma
+            noButton.addEventListener("click", function() {
+                let newYes = yesButton.cloneNode(true);
+                document.getElementById("answerButtons").appendChild(newYes);
+                newYes.addEventListener("click", function() {
+                    showFinalMessage();
+                });
+            });
+        }
 
-## Kullanım 🛠️
-1. **HTML dosyasını tarayıcınızda açın** veya **bir web hosting servisine yükleyin**.
-2. "Benimle sevgili olur musun?" yazısına tıklayın.
-3. "Hayır" butonunun nasıl davrandığını keşfedin! 😆
-4. "Evet" butonuna basınca sevimli ayıcıkları görün! 🥰
+        yesButton.addEventListener("click", showFinalMessage);
 
-## Kurulum 🔧
-Bu projeyi GitHub Pages, Vercel veya Netlify gibi platformlarla kolayca yayına alabilirsiniz.
-
-## Lisans 📜
-Bu proje sadece eğlence amaçlıdır. Kodları kullanarak kendi versiyonunuzu geliştirebilirsiniz! 🚀
+        function showFinalMessage() {
+            document.getElementById("answerButtons").classList.add("hidden");
+            document.getElementById("finalMessage").classList.remove("hidden");
+        }
+    </script>
+</body>
+</html>

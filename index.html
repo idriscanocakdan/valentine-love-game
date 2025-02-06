@@ -9,6 +9,7 @@
             text-align: center;
             font-family: Arial, sans-serif;
             background-color: #fff2f2;
+            overflow: hidden;
         }
         .container {
             margin-top: 50px;
@@ -23,11 +24,14 @@
         }
         .buttons {
             margin-top: 20px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
         }
         button {
             padding: 10px 20px;
             font-size: 16px;
-            margin: 5px;
             cursor: pointer;
             border: none;
             border-radius: 5px;
@@ -75,22 +79,45 @@
         let noButton = document.getElementById("noButton");
         let yesButton = document.getElementById("yesButton");
 
+        function getRandomPosition() {
+            let maxX = window.innerWidth - 150;
+            let maxY = window.innerHeight - 100;
+            let x = Math.random() * maxX;
+            let y = Math.random() * maxY;
+            return { x, y };
+        }
+
         if (variation === 0) {
             // Kaçan "Hayır" butonu
+            noButton.style.position = "absolute";
             noButton.addEventListener("mouseover", function() {
-                let x = Math.random() * (window.innerWidth - 100);
-                let y = Math.random() * (window.innerHeight - 100);
-                noButton.style.left = x + "px";
-                noButton.style.top = y + "px";
+                let pos = getRandomPosition();
+                noButton.style.left = pos.x + "px";
+                noButton.style.top = pos.y + "px";
+            });
+
+            // Mobil destek için dokunma olayını da ekle
+            noButton.addEventListener("touchstart", function() {
+                let pos = getRandomPosition();
+                noButton.style.left = pos.x + "px";
+                noButton.style.top = pos.y + "px";
             });
         } else if (variation === 1) {
             // "Evet" butonu çoğaltma
             noButton.addEventListener("click", function() {
                 let newYes = yesButton.cloneNode(true);
                 document.getElementById("answerButtons").appendChild(newYes);
+                
+                // Yeni butona da tıklanınca final mesajını gösterme özelliği ekle
                 newYes.addEventListener("click", function() {
                     showFinalMessage();
                 });
+
+                // Yeni "Evet" butonunu rastgele bir pozisyona koy
+                let pos = getRandomPosition();
+                newYes.style.position = "absolute";
+                newYes.style.left = pos.x + "px";
+                newYes.style.top = pos.y + "px";
             });
         }
 

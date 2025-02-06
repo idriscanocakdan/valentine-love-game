@@ -52,6 +52,45 @@
             width: 200px;
             margin-top: 20px;
         }
+        /* Yeni Zarf Stili */
+        #envelope {
+            cursor: pointer;
+            width: 100px;
+            height: 60px;
+            background-color: #ff4081;
+            border-radius: 10px;
+            margin-top: 20px;
+            position: relative;
+            display: inline-block;
+        }
+        #envelope:before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            width: 60px;
+            height: 30px;
+            background-color: white;
+            border-radius: 5px;
+            transform: rotate(45deg);
+        }
+        #paper {
+            display: none;
+            background-color: white;
+            width: 250px;
+            height: 150px;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            position: relative;
+            top: -50px;
+            left: 100px;
+        }
+        #paper .message {
+            font-size: 18px;
+            color: #333;
+        }
     </style>
 </head>
 <body>
@@ -62,13 +101,19 @@
             <button class="no" id="noButton">Hayır</button>
         </div>
         <div id="finalMessage" class="hidden">
-            <img src="<iframe src="https://giphy.com/embed/OHwAQwVMKXF8A" width="480" height="353" style="" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/valentines-days-animation-cartoon-network-OHwAQwVMKXF8A">via GIPHY</a></p>" class="Hearth" alt="Heyecanlı ">
+            <img src="<iframe src='https://giphy.com/embed/OHwAQwVMKXF8A' width='480' height='353' style='' frameBorder='0' class='giphy-embed' allowFullScreen></iframe><p><a href='https://giphy.com/gifs/valentines-days-animation-cartoon-network-OHwAQwVMKXF8A'>via GIPHY</a></p>" class="Hearth" alt="Heyecanlı ">
             <p>Harika! Şimdi sevgilin için en iyi hediyeyi seç!</p>
             <a href="https://app.hb.biz/G5UeuuxPdGbu" id="affiliateLink" target="_blank">Hediye Önerisi İçin Tıkla</a>
             <p style="font-size: 12px; color: gray;">*Bu bağlantı bir <strong>affiliate (reklam) linkidir</strong>. Satın alırsanız bize küçük bir komisyon kazandırabilirsiniz, size ekstra bir maliyet oluşturmaz.</p>
         </div>
+
+        <!-- Zarf ve Kağıt Bölümü -->
+        <div id="envelope"></div>
+        <div id="paper">
+            <div class="message">Kağıt açıldı! Sevgili olmayı kabul ettiniz mi?</div>
+        </div>
     </div>
-    
+
     <script>
         document.getElementById("questionCard").addEventListener("click", function() {
             document.getElementById("questionCard").classList.add("hidden");
@@ -127,6 +172,11 @@
             document.getElementById("answerButtons").classList.add("hidden");
             document.getElementById("finalMessage").classList.remove("hidden");
         }
+
+        // Zarf Tıklama Etkileşimi
+        document.getElementById("envelope").addEventListener("click", function() {
+            document.getElementById("paper").style.display = "block"; // Kağıt açılıyor
+        });
     </script>
 </body>
 </html>

@@ -1,182 +1,136 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Benimle Sevgili Olur Musun?</title>
+    <title>Send a Cute Valentine</title>
     <style>
         body {
-            text-align: center;
             font-family: Arial, sans-serif;
-            background-color: #fff2f2;
-            overflow: hidden;
-        }
-        .container {
-            margin-top: 50px;
-        }
-        .card {
-            display: inline-block;
+            background-color: #ffebf7;
+            text-align: center;
             padding: 20px;
-            background: white;
+            margin: 0;
+        }
+
+        .card {
+            background: #fff;
+            width: 80%;
+            max-width: 400px;
+            margin: auto;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            cursor: pointer;
+            padding: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
-        .buttons {
+
+        h1 {
+            font-size: 36px;
+            color: #ff69b4;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
             margin-top: 20px;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            gap: 10px;
+            font-size: 18px;
+            border-radius: 5px;
+            border: 2px solid #ff69b4;
+            resize: none;
         }
+
         button {
+            background-color: #ff69b4;
+            color: white;
             padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
             border: none;
             border-radius: 5px;
+            font-size: 20px;
+            cursor: pointer;
+            margin-top: 20px;
         }
-        .yes {
-            background-color: #ff4081;
-            color: white;
+
+        button:hover {
+            background-color: #ff3385;
         }
-        .no {
-            background-color: #ccc;
-            color: black;
-            position: absolute;
+
+        .animation-box {
+            margin-top: 20px;
         }
+
         .hidden {
             display: none;
         }
-        .hugging-bears {
-            width: 200px;
-            margin-top: 20px;
+
+        .heart-animation {
+            font-size: 50px;
+            animation: heartPulse 1s infinite;
         }
-        /* Yeni Zarf Stili */
-        #envelope {
-            cursor: pointer;
-            width: 100px;
-            height: 60px;
-            background-color: #ff4081;
-            border-radius: 10px;
-            margin-top: 20px;
-            position: relative;
-            display: inline-block;
+
+        @keyframes heartPulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 0.8;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
         }
-        #envelope:before {
-            content: '';
-            position: absolute;
-            top: 15px;
-            left: 20px;
-            width: 60px;
-            height: 30px;
-            background-color: white;
-            border-radius: 5px;
-            transform: rotate(45deg);
-        }
-        #paper {
-            display: none;
-            background-color: white;
-            width: 250px;
-            height: 150px;
-            margin-top: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            padding: 20px;
-            position: relative;
-            top: -50px;
-            left: 100px;
-        }
-        #paper .message {
+
+        .final-message {
+            margin-top: 30px;
             font-size: 18px;
-            color: #333;
+            color: #ff69b4;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="card" id="questionCard">Benimle sevgili olur musun?</div>
-        <div class="buttons hidden" id="answerButtons">
-            <button class="yes" id="yesButton">Evet</button>
-            <button class="no" id="noButton">Hayır</button>
-        </div>
-        <div id="finalMessage" class="hidden">
-            <img src="<iframe src='https://giphy.com/embed/OHwAQwVMKXF8A' width='480' height='353' style='' frameBorder='0' class='giphy-embed' allowFullScreen></iframe><p><a href='https://giphy.com/gifs/valentines-days-animation-cartoon-network-OHwAQwVMKXF8A'>via GIPHY</a></p>" class="Hearth" alt="Heyecanlı ">
-            <p>Harika! Şimdi sevgilin için en iyi hediyeyi seç!</p>
-            <a href="https://app.hb.biz/G5UeuuxPdGbu" id="affiliateLink" target="_blank">Hediye Önerisi İçin Tıkla</a>
-            <p style="font-size: 12px; color: gray;">*Bu bağlantı bir <strong>affiliate (reklam) linkidir</strong>. Satın alırsanız bize küçük bir komisyon kazandırabilirsiniz, size ekstra bir maliyet oluşturmaz.</p>
+
+    <div class="card">
+        <h1>Send a Cute Valentine</h1>
+        <p>Write a sweet message for your crush!</p>
+
+        <textarea id="message" placeholder="Write your message here..."></textarea>
+
+        <div class="animation-box hidden" id="heartBox">
+            <div class="heart-animation">💖💖</div>
         </div>
 
-        <!-- Zarf ve Kağıt Bölümü -->
-        <div id="envelope"></div>
-        <div id="paper">
-            <div class="message">Kağıt açıldı! Sevgili olmayı kabul ettiniz mi?</div>
+        <div class="final-message hidden" id="finalMessage">
+            <p>Gift suggestion for your crush: <a href="https://affiliate-link-here.com" target="_blank">Check this gift out!</a></p>
         </div>
+
+        <button id="sendBtn" onclick="sendValentine()">Send Valentine</button>
     </div>
 
     <script>
-        document.getElementById("questionCard").addEventListener("click", function() {
-            document.getElementById("questionCard").classList.add("hidden");
-            document.getElementById("answerButtons").classList.remove("hidden");
-        });
+        function sendValentine() {
+            var message = document.getElementById('message').value;
+            
+            if (message === "") {
+                alert("Please write a message!");
+                return;
+            }
 
-        let variation = Math.floor(Math.random() * 2);
-        let noButton = document.getElementById("noButton");
-        let yesButton = document.getElementById("yesButton");
+            // Show heart animation
+            document.getElementById('heartBox').classList.remove('hidden');
 
-        function getRandomPosition() {
-            let maxX = window.innerWidth - 150;
-            let maxY = window.innerHeight - 100;
-            let x = Math.random() * maxX;
-            let y = Math.random() * maxY;
-            return { x, y };
+            // Show final gift suggestion
+            document.getElementById('finalMessage').classList.remove('hidden');
+
+            // Disable the "Send Valentine" button after sending
+            document.getElementById('sendBtn').disabled = true;
+            document.getElementById('sendBtn').innerText = "Sent! 💖";
+
+            // Clear the textarea after sending
+            document.getElementById('message').value = "";
         }
-
-        if (variation === 0) {
-            // Kaçan "Hayır" butonu
-            noButton.style.position = "absolute";
-            noButton.addEventListener("mouseover", function() {
-                let pos = getRandomPosition();
-                noButton.style.left = pos.x + "px";
-                noButton.style.top = pos.y + "px";
-            });
-
-            // Mobil destek için dokunma olayını da ekle
-            noButton.addEventListener("touchstart", function() {
-                let pos = getRandomPosition();
-                noButton.style.left = pos.x + "px";
-                noButton.style.top = pos.y + "px";
-            });
-        } else if (variation === 1) {
-            // "Evet" butonu çoğaltma
-            noButton.addEventListener("click", function() {
-                let newYes = yesButton.cloneNode(true);
-                document.getElementById("answerButtons").appendChild(newYes);
-                
-                // Yeni butona da tıklanınca final mesajını gösterme özelliği ekle
-                newYes.addEventListener("click", function() {
-                    showFinalMessage();
-                });
-
-                // Yeni "Evet" butonunu rastgele bir pozisyona koy
-                let pos = getRandomPosition();
-                newYes.style.position = "absolute";
-                newYes.style.left = pos.x + "px";
-                newYes.style.top = pos.y + "px";
-            });
-        }
-
-        yesButton.addEventListener("click", showFinalMessage);
-
-        function showFinalMessage() {
-            document.getElementById("answerButtons").classList.add("hidden");
-            document.getElementById("finalMessage").classList.remove("hidden");
-        }
-
-        // Zarf Tıklama Etkileşimi
-        document.getElementById("envelope").addEventListener("click", function() {
-            document.getElementById("paper").style.display = "block"; // Kağıt açılıyor
-        });
     </script>
+
 </body>
 </html>

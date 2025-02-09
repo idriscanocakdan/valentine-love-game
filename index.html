@@ -108,6 +108,7 @@ document.getElementById("noBtn").addEventListener("click", function () {
         }
         .card {
             background: #FFC0CB;
+	    position: relative;
             width: 400px;
 	    height: 290px;	
             padding: 30px;
@@ -123,13 +124,14 @@ document.getElementById("noBtn").addEventListener("click", function () {
         }
         #yesBtn {
             background: #E74C3C;
+	    position: relative;
             color: white;
         }
         #noBtn {
     background: white;
     border: 1px solid black;
     cursor: pointer;
-    position: absolute;
+    position: relative;
     left: 50%;
     transform: translateX(-50%);
 }
@@ -262,23 +264,27 @@ body {
     padding: 13px 26px;
     font-size: 20px;
     border: none;
+position: relative;
     cursor: pointer;
     transition: 0.3s;
 }
 
 #yesBtn {
     background: #E74C3C;
+position: relative;
     color: white;
 }
 
 #noBtn {
     background: white;
+position: relative;
     border: 1px solid black;
     cursor: not-allowed;
 }
 
 .yay {
     background: #FFC0CB;
+position: relative;
     width: 325px;
     padding: 39px;
 }

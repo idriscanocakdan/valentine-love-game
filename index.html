@@ -29,7 +29,7 @@
     </div>
 
     <div id="yayScreen" class="yay hidden">
-        <img class="fade-in" src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExOWRvbDJ6YTdseW5hOGE0emU4a2xpeDJsczRvenY4YnhjcWs1dXBpcyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/c76IJLufpNwSULPk77/giphy.gif" alt="Yay! GIF">
+        <img class="fade-in" src="https://i.pinimg.com/736x/0f/f4/a7/0ff4a7bf8dd7596dca9c34700133977d.jpg" alt="Yay! IMG">
         
         
         
@@ -108,7 +108,6 @@ document.getElementById("noBtn").addEventListener("click", function () {
         }
         .card {
             background: #FFC0CB;
-	    position: relative;
             width: 400px;
 	    height: 290px;	
             padding: 30px;
@@ -124,14 +123,13 @@ document.getElementById("noBtn").addEventListener("click", function () {
         }
         #yesBtn {
             background: #E74C3C;
-	    position: relative;
             color: white;
         }
         #noBtn {
     background: white;
     border: 1px solid black;
     cursor: pointer;
-    position: relative;
+    position: absolute;
     left: 50%;
     transform: translateX(-50%);
 }
@@ -264,27 +262,23 @@ body {
     padding: 13px 26px;
     font-size: 20px;
     border: none;
-position: relative;
     cursor: pointer;
     transition: 0.3s;
 }
 
 #yesBtn {
     background: #E74C3C;
-position: relative;
     color: white;
 }
 
 #noBtn {
     background: white;
-position: relative;
     border: 1px solid black;
     cursor: not-allowed;
 }
 
 .yay {
     background: #FFC0CB;
-position: relative;
     width: 325px;
     padding: 39px;
 }

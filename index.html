@@ -1,188 +1,319 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sevgiliye Mektup</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Painter&display=swap');
-
-        body {
-            font-family: 'Painter', cursive;
-            background-color: #FFFAF0;
-            text-align: center;
-            padding: 20px;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        .container {
-            position: relative;
-            width: 400px;
-            height: 300px;
-        }
-
-        .kagit {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%) translateY(0) scaleY(0.5);
-            width: 350px;
-            height: 500px;
-            background: #D86476;
-            border-radius: 10px;
-            transition: transform 1s ease-in-out, opacity 1s ease-in-out;
-            z-index: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            overflow: hidden;
-            opacity: 0;
-        }
-
-        .kagit p {
-            font-size: 40px;
-            font-weight: bold;
-            color: #FFFFFF;
-            margin: 10px 0;
-            opacity: 1;
-            transition: none;
-        }
-
-        .buttons {
-            display: none;
-            margin-top: 20px;
-            gap: 20px;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
-        }
-
-        .buttons button {
-            font-size: 24px;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s ease-in-out;
-        }
-
-        .evet {
-            background-color: #64ad9f;
-            color: white;
-        }
-
-        .hayir {
-            background-color: #50212b;
-            color: white;
-            position: relative;
-        }
-
-        .zarf {
-            background: #9A4555;
-            width: 400px;
-            height: 300px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 10px;
-            cursor: pointer;
-            position: absolute;
-            z-index: 2;
-            transition: transform 1.5s ease-in-out, opacity 1.5s ease-in-out;
-        }
-
-        .yazi {
-            font-size: 40px;
-            font-weight: bold;
-            color: #FFFFFF;
-        }
-
-        .show-kagit {
-            transform: translateX(-50%) translateY(-50%) scaleY(1);
-            z-index: 1;
-            opacity: 1;
-        }
-
-        .hide-zarf {
-            transform: translateY(200px);
-            opacity: 0;
-        }
-
-        .show-buttons {
-            opacity: 1;
-        }
-
-        .hidden {
-            display: none;
-        }
-    </style>
+    <title>Valentine Surprise</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <div class="zarf" id="zarf">
-            <p class="yazi">Senin için...</p>
-        </div>
-        <div class="kagit" id="kagit">
-            <p>Benimle</p>
-            <p>sevgili</p>
-            <p>olur</p>
-            <p>musun?</p>
-            <div class="buttons" id="buttons">
-                <button class="evet" id="evet">EVET</button>
-                <button class="hayir" id="hayir">HAYIR</button>
-            </div>
-        </div>
-        <div id="animasyon" class="hidden">🐻❤️🐻</div>
+
+    <div id="envelope" class="envelope">
+        <img src=>
+        <p>Senin için...</p>
+        <img class="stamp" src="https://cdn2.iconfinder.com/data/icons/flat-lovely-valentine/32/valentine_009-stamp-postcard-love-heart-512.png" alt="Stamp">
+    </div>
+
+    <div id="card" class="card hidden">
+        <p class="question">Benim sevgilim olur musun?</p>
+        <button id="yesBtn">EVET!</button>
+        <button id="noBtn">hayır</button>
+    </div>
+
+    <div id="yayScreen" class="yay hidden">
+        <img class="fade-in" src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExOWRvbDJ6YTdseW5hOGE0emU4a2xpeDJsczRvenY4YnhjcWs1dXBpcyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/c76IJLufpNwSULPk77/giphy.gif" alt="Yay! GIF">
+        
+        
+        
+        <p class="subtext fade-in-delay">Sevgiline hediye almak ister misin?</p>
+        <a href="https://app.hb.biz/9WrDJXlTcGT1" class="cta pop-up">Buraya Tıkla!!!</a>
+        <p><small>Bu bağlantı üzerinden yapılan alışverişlerden komisyon kazanabilirim.</small></p>
     </div>
 
     <script>
-        document.getElementById("zarf").addEventListener("click", function() {
-            let kagit = document.getElementById("kagit");
-            let zarf = document.getElementById("zarf");
-            let buttons = document.getElementById("buttons");
-            
-            kagit.classList.add("show-kagit");
-            
-            setTimeout(() => {
-                zarf.classList.add("hide-zarf");
-                kagit.style.transform = "translateX(-50%) translateY(0) scaleY(1)";
-            }, 1000);
-            
-            setTimeout(() => {
-                buttons.style.display = "flex";
-                setTimeout(() => {
-                    buttons.classList.add("show-buttons");
-                }, 100);
-            }, 2000);
+        document.getElementById("envelope").addEventListener("click", function () {
+            document.getElementById("envelope").classList.add("hidden");
+            document.getElementById("card").classList.remove("hidden");
         });
 
-        let effects = [
-            function hayirKacsin() {
-                let hayir = document.getElementById("hayir");
-                let randomX = Math.random() * 200 - 100;
-                let randomY = Math.random() * 100 - 50;
-                hayir.style.transform = `translate(${randomX}px, ${randomY}px)`;
-            },
-            function evetCogalsin() {
-                let evet = document.getElementById("evet");
-                let newButton = evet.cloneNode(true);
-                document.getElementById("buttons").appendChild(newButton);
-            }
-        ];
+        document.getElementById("yesBtn").addEventListener("click", function () {
+            document.getElementById("card").classList.add("hidden");
+            document.getElementById("yayScreen").classList.remove("hidden");
+        });
+
         
-        let chosenEffect = effects[Math.floor(Math.random() * effects.length)];
-        document.getElementById("hayir").addEventListener("click", chosenEffect);
+    
+document.getElementById("noBtn").addEventListener("click", function () {
+    let yesBtn = document.getElementById("yesBtn");
+    let currentYesSize = parseFloat(window.getComputedStyle(yesBtn).transform.split(',')[3]);
+    
+    if (!currentYesSize) currentYesSize = 1;
+    
+    yesBtn.style.transform = `scale(${currentYesSize + 0.1})`;
+});
+</script>
 
-        document.getElementById("evet").addEventListener("click", function() {
-            document.getElementById("kagit").classList.add("hidden");
-            document.getElementById("buttons").classList.add("hidden");
-            document.getElementById("animasyon").classList.remove("hidden");
-        });
-    </script>
+    <style>
+        body {
+            background: #FDF6EC;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        .envelope, .card, .yay {
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .envelope {
+            background: #E74C3C;
+            width: 300px;
+            height: 200px;
+            position: relative;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .envelope img {
+            width: 100%;
+        }
+        .envelope p {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .envelope .stamp {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 50px;
+        }
+        .hidden {
+            display: none;
+        }
+        .card {
+            background: #FFC0CB;
+            width: 250px;
+            padding: 30px;
+        }
+        .card button {
+            display: block;
+            margin: 10px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        #yesBtn {
+            background: #E74C3C;
+            color: white;
+        }
+        #noBtn {
+    background: white;
+    border: 1px solid black;
+    cursor: pointer;
+    position: absolute;
+    bottom: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+        .yay {
+            background: #FFC0CB;
+            width: 250px;
+            padding: 30px;
+        }
+        .yay img {
+            width: 100px;
+        }
+        .cta {
+            color: white;
+            background: #E74C3C;
+            padding: 10px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+        }
+    .yay-text {
+    font-size: 24px;
+    font-weight: bold;
+    animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 2s ease-in forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.fade-in-delay {
+    opacity: 0;
+    animation: fadeIn 2s ease-in forwards;
+    animation-delay: 2s;
+}
+
+.pop-up {
+    opacity: 0;
+    transform: scale(0.5);
+    animation: popUp 0.5s ease-out forwards;
+    animation-delay: 4s;
+}
+
+@keyframes popUp {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+html, body {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+body {
+    background: #FDF6EC;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+.envelope, .card, .yay {
+    margin: 50px auto;
+    padding: 26px;
+    border-radius: 13px;
+    transform: scale(1.3);
+}
+
+.envelope {
+    background: #E74C3C;
+    width: 390px;
+    height: 260px;
+    position: relative;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.envelope img {
+    width: 130%;
+}
+
+.envelope p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1.3);
+    color: white;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.envelope .stamp {
+    position: absolute;
+    top: 13px;
+    right: 13px;
+    width: 65px;
+}
+
+.card {
+    background: #FFC0CB;
+    width: 325px;
+    padding: 39px;
+}
+
+.card button {
+    display: block;
+    margin: 13px auto;
+    padding: 13px 26px;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#yesBtn {
+    background: #E74C3C;
+    color: white;
+}
+
+#noBtn {
+    background: white;
+    border: 1px solid black;
+    cursor: not-allowed;
+}
+
+.yay {
+    background: #FFC0CB;
+    width: 325px;
+    padding: 39px;
+}
+
+.yay img {
+    width: 130px;
+}
+
+.cta {
+    color: white;
+    background: #E74C3C;
+    padding: 13px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 13px;
+}
+
+html, body {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+@media (max-width: 768px) {
+    .envelope, .card, .yay {
+        transform: scale(1);
+    }
+    .envelope {
+        width: 300px;
+        height: 200px;
+    }
+    .envelope p {
+        font-size: 20px;
+    }
+    .envelope .stamp {
+        width: 50px;
+    }
+    .card, .yay {
+        width: 250px;
+        padding: 30px;
+    }
+    .cta {
+        padding: 10px;
+    }
+}
+
+</style>
+
 </body>
 </html>
